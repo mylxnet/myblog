@@ -11,7 +11,7 @@
 
 2 . 下载安装
 
-    $ go get github.com/Echosong/beego_blog
+    $ go get github.com/shirdonliao/beego_blog
 
 4 . 加入数据库
 
@@ -56,6 +56,6 @@ http://localhost:8099/admin/login (后台)
 
  8 . 联系方式
 
-  qq:313690636
+  qq:823923263
 
 
