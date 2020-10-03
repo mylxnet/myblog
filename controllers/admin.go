@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/shirdonliao/beego_blog/models"
-	"github.com/shirdonliao/beego_blog/util"
+	"beego_blog/models"
+	"beego_blog/util"
 	"strconv"
 	"strings"
 	"time"
@@ -229,12 +229,15 @@ func (c *AdminController) Categoryadd() {
 
 //处理插入数据的字段
 func (c *AdminController) CategorySave() {
-	name := c.Input().Get("name")
+	name := c.GetString("name")
 	id := c.Input().Get("id")
-	category := models.Category{}
-	category.Name = name
+	fmt.Println(id)
+	Category := models.Category{}
+	Category.Name = name
+	Category.Created = time.Now()
 	if id == "" {
-		if _, err := c.o.Insert(&category); err != nil {
+		if _, err := c.o.Insert(&Category); err != nil {
+			fmt.Println(err)
 			c.History("插入数据错误", "")
 		} else {
 			c.History("插入数据成功", "/admin/category.html")
@@ -244,9 +247,11 @@ func (c *AdminController) CategorySave() {
 		if err != nil {
 			c.History("参数错误", "")
 		}
-		category.Id = intId
-		if _, err := c.o.Update(&category); err != nil {
+		Category.Id = intId
+		
+				if _, err := c.o.Update(&Category); err != nil {
 			c.History("更新数据出错", "")
+			fmt.Println(intId)
 		} else {
 			c.History("插入数据成功", "/admin/category.html")
 		}
